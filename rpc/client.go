@@ -362,6 +362,10 @@ func (c *Client) BatchCallContext(ctx context.Context, b []BatchElem) error {
 	}
 
 	var err error
+	fmt.Printf("length of batchelems in BatchCallContext. length: %d\n", len(b))
+	timeout, ok := ctx.Deadline()
+	fmt.Printf("context object in BatchCallContext: timeout in ns: %d, ok?: %t\n", timeout.Nanosecond(), ok)
+
 	if c.isHTTP {
 		err = c.sendBatchHTTP(ctx, op, msgs)
 	} else {

@@ -164,7 +164,9 @@ func (c *Client) sendBatchHTTP(ctx context.Context, op *requestOp, msgs []*jsonr
 	if err := json.NewDecoder(respBody).Decode(&respmsgs); err != nil {
 		return err
 	}
+	fmt.Printf("respmsgs in sendBatchHTTP. length: %d. respmsgs: %+v\n", len(respmsgs), respmsgs)
 	for i := 0; i < len(respmsgs); i++ {
+		fmt.Printf("for loop in sendBatchHTTP. index: %d\n", i)
 		op.resp <- &respmsgs[i]
 	}
 	return nil
